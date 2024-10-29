@@ -1,0 +1,40 @@
+plugins {
+    id "com.android.application" 
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace "com.my_login_" // Ensure this matches your package name in the manifest
+    compileSdk = flutter.compileSdkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId "com.my_login_"
+        minSdk = 24
+        targetSdk = flutter.targetSdkVersion
+    }
+
+    buildTypes {
+        release {
+            // signingConfig can be omitted
+        }
+    }
+}
+
+// Add the Truecaller SDK dependency here
+dependencies {
+    implementation "com.truecaller.android.sdk:truecaller-sdk:3.0.0"
+}
+
+flutter {
+    source = "../.." // Path to your Flutter source
+}

@@ -1,0 +1,39 @@
+// project-level build.gradle file
+
+buildscript {
+    ext.kotlin_version = '1.8.0' // Specify your Kotlin version
+    repositories {
+        google()
+        mavenCentral() // Add mavenCentral() here
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.4.2' // Ensure AGP version is at least 7.4.2
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        // Add other dependencies if needed
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+// Set root project build directory
+rootProject.buildDir = "../build"
+
+// Define build directories for subprojects
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+
+// Ensure evaluation order for subprojects
+subprojects {
+    project.evaluationDependsOn(":app")
+}
+
+// Define a clean task to delete the build directory
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
